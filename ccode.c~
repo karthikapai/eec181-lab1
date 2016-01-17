@@ -1,0 +1,98 @@
+int main()
+{
+  #define H 118;
+  #define E 121;
+  #define L 56;
+  #define O 63;
+  #define U 62;
+  #define R 119;
+  #define D 94;
+  #define space 0;
+  int hello_uuorld[12] = {H, E, L, L, O, space, U, U, O, R, L D};
+
+
+   // Declare volatile pointers to I/O registers (volatile means that the locations will not be cached,
+   // even in registers
+  
+  volatile int *LED_ptr = (int *) 0xFF200040; // red LED address
+  volatile int *HEX3_HEX0_ptr = (int *) 0xFF200020; // HEX3_HEX0 address
+  volatile int *HEX5_HEX4_ptr = (int *) 0xFF200010; // HEX5_HEX4 address
+  volatile int *SW_switch_ptr = (int *) 0xFF200030; // SW slider switch address
+  volatile int *KEY_ptr = (int *) 0xFF200000; // pushbutton KEY address
+
+  
+  int SW_value;
+
+  while (1)
+  {
+    SW_value = *(SW_switch_ptr); // read the SW slider switch values
+    *(LED_ptr) = SW_value; // light up the red LEDs
+
+    if (*KEY_ptr != 0) // check if any KEY was pressed
+    {   
+       bool KeyArrayBits[32] = *KEY_ptr;
+       bool Key0_bit = KeyArrayBits[0];
+       bool Key1_bit = KeyArrayBits[1];
+       bool Key2_bit = KeyArrayBits[2];
+       bool Key3_bit = KeyArraysBits[3];
+       if (Key0_bit == 1)
+          int KeyPress = 0;  // Key0 was pressed
+       else if (Key1_bit == 1)
+          int KeyPress = 1   // Key1 was pressed   
+       else if (Key2_bit == 1)
+          int KeyPress = 2   // Key2 was pressed 
+       else if (Key3_bit == 1)
+          int KeyPress = 3   // Key3 was pressed 
+ 
+       //HEX_bits = SW_value; // set pattern using SW values
+       while (*KEY_ptr != 0); // wait for pushbutton KEY release
+    }
+    
+    else if 
+    {
+      switch (KeyPress)
+         {
+            case 0: // pattern rotating 
+                  while (*KEY_ptr == 0)
+                     { 
+                       for ( int i = 0; i < 12; i++)
+                         {
+                           // need delay go here
+                           if (i == 0)
+                             *HEX3_HEX0_ptr = hello_uuorld[i];
+                           if (i == 1)
+                             *HEX3_HEX0_ptr = hello_uuorld[i-1] << 8 + hello_uuorld[i];
+                           if (i == 2)
+                             *HEX3_HEX0_ptr = hello_uuorld[i-2] << 16 + hello_uuorld[i-1] << 8 + hello_uuorld[i];
+                           if (i == 3)
+                             *HEX3_HEX0_ptr = hello_uuorld[i-3] << 24 + hello_uuorld[i-2] << 16 + hello_uuorld[i-1] << 8 + hello_uuorld[i];
+                           if (i == 4)
+                             *HEX3_HEX0_ptr = hello_uuorld[i-4] << 24 + hello_uuorld[i-2] << 16 + hello_uuorld[i-1] << 8 + hello_uuorld[i];
+                           
+                 
+              // statements;
+
+            case 1: // Speed up rotating
+
+              // statements;
+
+            case 2: // Slow down rotating
+
+              //statements;
+
+            case 5: // Change pattern
+
+              //statements;
+
+          }
+
+    }
+
+  }
+
+
+}  // end of main()
+  
+  
+  
+
